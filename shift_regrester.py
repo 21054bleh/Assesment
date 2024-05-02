@@ -15,31 +15,35 @@ numbers = [
 ]
 number = 0
 
+textlist2 = []
 l1 = numbers
 loop = 0
 
 # functions go here
 def encode():
-  # turn text to numbers to represent new letters
-  number = 0
-  encoded = text
-  for i in range(26):
-    encoded = encoded.replace(letters[number], shift_encoder[number+rightshift])
-    number = number + 1
+    number = 0
+    textlist2 = []
+    print(textlist2)
+    for i in range(26):
+        print(f"number = {number}")
+        if letters[number] in textlist:
+            print(f"letter = {shift_letters[number + rightshift]}, number = {numbers[number]} + {rightshift} = {numbers[number + rightshift]}")
+            textlist2 = [sub.replace(textlist[number], numbers[number + rightshift]) for sub in textlist]
+        else:
+            # Handle the case when the index is out of range
+            print(f"letter = {letters[number]} not in list, number {numbers[number]}")
+        print(textlist2)
+        number += 1
 
-
-  print(encoded, number)
-  
-  # turn numbers to text
-  number = 0
-  for i in range(26):
-    encoded = encoded.replace(numbers[number], letters[number])
-    print(encoded, number)
-    number = number + 1
 
 
 text = input('Text to encrypt: ')  # Type your text
 rightshift = int(input('How much to shift: '))  # How much you want to shift
+len_oftext = len(text)  # grabs the lengh of text
+print(f"Len = {len_oftext}")  # remove when done -----
+textlist = list(text)   # turns text into list
+
+# shifts letters over
 while loop < rightshift:
      l2 = []
      l2 = l1[1:]
@@ -48,15 +52,19 @@ while loop < rightshift:
      l1 = l2
      loop += 1
 
+
+# adds place holder numbers for shift
 for i in range(rightshift):
     shift_encoder += "0"
     shift_letters += "0"
 
 
-print(f'shift encoder = {shift_encoder}')
+print(f'shift encoder = {shift_encoder}')  # remove when done -----
 shift_encoder += l1
 shift_letters += letters
-print(f'shift encoder = {shift_letters}')
-print(f'shift encoder = {shift_encoder}')
+print(f'shift letters = {shift_letters}')  # remove when done -----
+print(f'shift encoder = {shift_encoder}')  # remove when done -----
+print(text)
 encode()
 print(f"encoded/decoded = {encoded}")
+print(textlist2)
