@@ -28,7 +28,7 @@ def encode():
         print(f"number = {number}")
         if letters[number] in textlist:
             print(f"letter = {shift_letters[number + rightshift]}, number = {numbers[number]} + {rightshift} = {numbers[number + rightshift]}")
-            textlist2 = [sub.replace(textlist[number], numbers[number + rightshift]) for sub in textlist]
+            textlist2 = [sub.replace(letters[number], numbers[number + rightshift]) for sub in textlist]
         else:
             # Handle the case when the index is out of range
             print(f"letter = {letters[number]} not in list, number {numbers[number]}")
