@@ -18,22 +18,30 @@ number = 0
 textlist2 = []
 l1 = numbers
 loop = 0
+numbercount = 0
 
 # functions go here
-def encode():
-    number = 0
-    textlist2 = []
-    print(textlist2)
+def encode_num(textlist2,number):
     for i in range(26):
-        print(f"number = {number}")
-        if letters[number] in textlist:
-            print(f"letter = {shift_letters[number + rightshift]}, number = {numbers[number]} + {rightshift} = {numbers[number + rightshift]}")
-            textlist2 = [sub.replace(letters[number], numbers[number + rightshift]) for sub in textlist]
+        if letters[i] in textlist2:
+            textlist2 = [sub.replace(letters[i], number[i + rightshift]) for sub in textlist2]
         else:
             # Handle the case when the index is out of range
-            print(f"letter = {letters[number]} not in list, number {numbers[number]}")
+            print(f"letter = {letters[i]} not in list, number {numbers[i]}")
+    return textlist2
+
+def encode_lett(textlist2,number):
+    for i in range(26):
+        print(f"number = {number}")
+        if numbers[i] in textlist2:
+            print(f"letter = {shift_letters[i + rightshift]}, number = {number[i]} + {rightshift} = {number[i + rightshift]}")
+            textlist2 = [sub.replace(number[i], letters[i]) for sub in textlist2]
+        else:
+            # Handle the case when the index is out of range
+            print(f"Number = {numbers[i]} not in list, Letter {letters[i]}")
         print(textlist2)
-        number += 1
+    return textlist2
+
 
 
 
@@ -59,12 +67,10 @@ for i in range(rightshift):
     shift_letters += "0"
 
 
-print(f'shift encoder = {shift_encoder}')  # remove when done -----
 shift_encoder += l1
 shift_letters += letters
-print(f'shift letters = {shift_letters}')  # remove when done -----
-print(f'shift encoder = {shift_encoder}')  # remove when done -----
-print(text)
-encode()
+encode_numb = encode_num(textlist, shift_encoder)
+print(f"\nencode_numb = {encode_numb}\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n\n")
+encode_done = encode_lett(encode_numb, shift_encoder)
 print(f"encoded/decoded = {encoded}")
 print(textlist2)
