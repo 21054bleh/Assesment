@@ -25,16 +25,14 @@ def encode_num(textlist2,number):
     for i in range(26):
         if letters[i] in textlist2:
             textlist2 = [sub.replace(letters[i], number[i + rightshift]) for sub in textlist2]
-        else:
-            # Handle the case when the index is out of range
-            print(f"letter = {letters[i]} not in list, number {numbers[i]}")
     return textlist2
 
 def encode_lett(textlist2,number):
+    textlist2 = [sub.replace(2, 'A') for sub in textlist2]
+    print(textlist2)
     for i in range(26):
-        print(f"number = {number}")
         if numbers[i] in textlist2:
-            print(f"letter = {shift_letters[i + rightshift]}, number = {number[i]} + {rightshift} = {number[i + rightshift]}")
+            print(f"Number = {numbers[i]}, Letters = {letters[i]}")
             textlist2 = [sub.replace(number[i], letters[i]) for sub in textlist2]
         else:
             # Handle the case when the index is out of range
