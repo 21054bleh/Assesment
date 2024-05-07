@@ -13,7 +13,7 @@ numbers = [
     '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
     '21', '22', '23', '24', '25', '26'
 ]
-number = 0
+#number = 0
 
 textlist2 = []
 l1 = numbers
@@ -21,23 +21,19 @@ loop = 0
 numbercount = 0
 
 # functions go here
-def encode_num(textlist2,number):
+def encode_num(textlist2,shift):
+    print(rightshift)
+    print(shift)
     for i in range(26):
         if letters[i] in textlist2:
-            textlist2 = [sub.replace(letters[i], number[i + rightshift]) for sub in textlist2]
+            textlist2 = [sub.replace(letters[i], shift[i + rightshift]) for sub in textlist2]
     return textlist2
 
-def encode_lett(textlist2,number):
-    textlist2 = [sub.replace(2, 'A') for sub in textlist2]
-    print(textlist2)
-    for i in range(26):
+def encode_lett(textlist2,shift):
+    for i in range(25,-1,-1):
         if numbers[i] in textlist2:
-            print(f"Number = {numbers[i]}, Letters = {letters[i]}")
-            textlist2 = [sub.replace(number[i], letters[i]) for sub in textlist2]
-        else:
-            # Handle the case when the index is out of range
-            print(f"Number = {numbers[i]} not in list, Letter {letters[i]}")
-        print(textlist2)
+            textlist2 = [sub.replace(shift[i], letters[i]) for sub in textlist2]
+    print(textlist2)
     return textlist2
 
 
@@ -69,6 +65,5 @@ shift_encoder += l1
 shift_letters += letters
 encode_numb = encode_num(textlist, shift_encoder)
 print(f"\nencode_numb = {encode_numb}\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n\n")
-encode_done = encode_lett(encode_numb, shift_encoder)
+encode_done = encode_lett(encode_numb, numbers)
 print(f"encoded/decoded = {encoded}")
-print(textlist2)
