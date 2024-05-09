@@ -1,8 +1,10 @@
 l1 = []
 l2 = []
 encoded = ''
+dashdecor = '-=-=-=-=-=-=-=-=-='
+rightshift = 0
+choseninput = ''
 shift_encoder = []
-shift_letters = []
 letters = [
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
     'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
@@ -22,27 +24,32 @@ numbercount = 0
 
 # functions go here
 def encode_num(textlist2,shift):
-    print(rightshift)
-    print(shift)
+    # loops for every letter turning to number
     for i in range(26):
+        #if a letter is in the list then it changes it to the apropriate number
         if letters[i] in textlist2:
             textlist2 = [sub.replace(letters[i], shift[i + rightshift]) for sub in textlist2]
     return textlist2
 
-def encode_lett(textlist2,shift):
+def decode_num(textlist2,shift):
+    #loops for every number turning to letter
     for i in range(25,-1,-1):
+        #if a number is in the list then it changes it to the apropriate letter
         if numbers[i] in textlist2:
             textlist2 = [sub.replace(shift[i], letters[i]) for sub in textlist2]
-    print(textlist2)
     return textlist2
 
 
 
-
-text = input('Text to encrypt: ')  # Type your text
-rightshift = int(input('How much to shift: '))  # How much you want to shift
-len_oftext = len(text)  # grabs the lengh of text
-print(f"Len = {len_oftext}")  # remove when done -----
+# input your text
+while choseninput != "":
+    choseninput = input('Text to encrypt: ')  # Type your text
+while rightshift != 0:
+    try :
+        rightshift = int(input('How much to shift: '))  # How much you want to shift
+    except ValueError:
+        print('Sorry please enter a number')
+lengthoftext = len(text)
 textlist = list(text)   # turns text into list
 
 # shifts letters over
@@ -58,12 +65,13 @@ while loop < rightshift:
 # adds place holder numbers for shift
 for i in range(rightshift):
     shift_encoder += "0"
-    shift_letters += "0"
+
+for i in range(lengthoftext // 2):
+    dashdecor += "-="
 
 
 shift_encoder += l1
-shift_letters += letters
 encode_numb = encode_num(textlist, shift_encoder)
-print(f"\nencode_numb = {encode_numb}\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n\n")
-encode_done = encode_lett(encode_numb, numbers)
-print(f"encoded/decoded = {encoded}")
+encode_done = decode_num(encode_numb, numbers)
+encoded = ''.join(encode_done)
+print(f"\n{dashdecor}-\n\nencoded/decoded: {encoded}")
